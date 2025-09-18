@@ -105,7 +105,7 @@ export default function ViewProfile({ userProfile }) {
           {/* Profile Header */}
           <div className={styles.header}>
             <img
-              src={`${BASE_URL}/uploads/${userProfile.userId?.profilePicture}`}
+              src={`${BASE_URL}uploads/${userProfile.userId?.profilePicture}`}
               alt="Profile Picture"
               className={styles.profilePic}
             />

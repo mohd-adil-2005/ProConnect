@@ -33,7 +33,7 @@ function Discover() {
                 return(
 
                     <div  onClick={()=>{router.push(`/view_profile?username=${users.userId.username}`)}} className={styles.userCard} key={users._id}>
-                    <img src={`${BASE_URL}/uploads/${users.userId?.profilePicture}`}alt="avtar"  style={{width:"8%"}}/>
+                    <img src={`${BASE_URL}uploads/${users.userId?.profilePicture}`}alt="avtar"  style={{width:"8%"}}/>
                    <div className="">
 
                      <h3 className={styles.userName}>{users.userId.name}</h3>

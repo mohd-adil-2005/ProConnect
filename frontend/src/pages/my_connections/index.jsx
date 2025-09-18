@@ -53,7 +53,7 @@ function Myconnection() {
                   >
                     <div className={styles.profilePicture}>
                       <img
-                        src={`${BASE_URL}/uploads/${user.userId.profilePicture}`}
+                        src={`${BASE_URL}uploads/${user.userId.profilePicture}`}
                         alt="profilePicture"
                         className=""
                       />
@@ -103,7 +103,7 @@ function Myconnection() {
                   >
                     <div className={styles.profilePicture}>
                       <img
-                        src={`${BASE_URL}/uploads/${user.userId.profilePicture}`}
+                        src={`${BASE_URL}uploads/${user.userId.profilePicture}`}
                         alt="profilePicture"
                         className=""
                       />

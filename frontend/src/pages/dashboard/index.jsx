@@ -66,7 +66,7 @@ function dashboard() {
               <div className={styles.createPostContainer}>
                 {" "}
                 <img
-                  src={`${BASE_URL}/uploads/${authState.user?.userId?.profilePicture}`}
+                  src={`${BASE_URL}uploads/${authState.user?.userId?.profilePicture}`}
                   alt="Profile"
                   className={styles.userProfile}
                 />
@@ -117,7 +117,7 @@ function dashboard() {
                         <div   className={styles.singleCard_profileContainer}>
                           <img style={{cursor:"pointer"}}  onClick={()=>{router.push(`/view_profile?username=${post.userId.username}`)}} 
 
-                            src={`${BASE_URL}/${post.userId.profilePicture}`}
+                            src={`${BASE_URL}uploads/${post.userId.profilePicture}`}
                             alt="profilePicture" 
                             name="profile"
                           />
@@ -166,7 +166,7 @@ function dashboard() {
                              
                              {post.media!== ""? 
                               <img
-                                src={`${BASE_URL}/uploads/${post.media}`}
+                                src={`${BASE_URL}uploads/${post.media}`}
                                 alt="media"
                               />:<></>}
                              
@@ -267,7 +267,7 @@ function dashboard() {
                       
       style={{cursor:"pointer"}}  onClick={()=>{router.push(`/view_profile?username=${comment.userId.username}`)}} 
                       
-                      src={`${BASE_URL}/uploads/${comment.userId?.profilePicture}`}alt="avtar" className={styles.avtarImg} />
+                      src={`${BASE_URL}uploads/${comment.userId?.profilePicture}`}alt="avtar" className={styles.avtarImg} />
                        <p style={{fontWeight:"500", fontSize:"1.1rem"}}>
                         {comment.userId.name}
                       </p>
