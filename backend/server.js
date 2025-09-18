@@ -16,15 +16,32 @@ async function main() {
   console.log("Db has connected");
 
 }
-app.use(cors({
-  origin: [
-    "https://proconnect-sandy.vercel.app", // ✅ remove trailing slash
+
+
+
+const cors = require('cors');
+
+const allowedOrigins = [
+  "https://proconnect-sandy.vercel.app", // ✅ remove trailing slash
     "https://proconnect-git-main-mohd-adil-2005s-projects.vercel.app",
     "https://proconnect-bvb9uscyu-mohd-adil-2005s-projects.vercel.app",
-     "http://localhost:3000"
+     "http://localhost:3000"                // for local development
+];
 
-  ]
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
+
+
+
+
+
 app.use(express.json());
 
 app.use(postroutes);
