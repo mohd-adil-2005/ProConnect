@@ -17,7 +17,10 @@ async function main() {
 
 }
 app.use(cors({
-  origin: "https://proconnectapp-uxwe.onrender.com",
+   origin: [
+     "https://proconnect-sandy.vercel.app/", // ✅ new Vercel frontend URL
+      "http://localhost:3000"             // ✅ for local dev
+    ],
   credentials: true
 }));
 app.use(express.json());
