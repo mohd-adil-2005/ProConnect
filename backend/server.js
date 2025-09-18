@@ -23,8 +23,7 @@ app.use(cors({
     "https://proconnect-bvb9uscyu-mohd-adil-2005s-projects.vercel.app",
      "http://localhost:3000"
 
-  ],
-  credentials: true // optional since you use localStorage, not cookies
+  ]
 }));
 app.use(express.json());
 
