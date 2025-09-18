@@ -17,7 +17,7 @@ async function main() {
 
 }
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://proconnectapp-uxwe.onrender.com",
   credentials: true
 }));
 app.use(express.json());
