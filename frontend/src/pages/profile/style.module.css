@@ -377,3 +377,15 @@ margin: 0.3rem;
 
 
    } 
+
+
+   @media   only screen and (max-width:600px) {
+
+    .AllCommentsContainer >.addExpreinceInput {
+      width: 7rem;
+      /* margin-right: 10px; */
+
+
+    }
+    
+   }

@@ -34,7 +34,8 @@ function NavbarComponent() {
   return (
     <div className={styles.container}>
       <nav className={styles.navBar}>
-        <h2 style={{cursor:'Pointer'}}
+        <h2  className={styles.proConnect}
+      
           onClick={() => {
             router.push("/");
           }}

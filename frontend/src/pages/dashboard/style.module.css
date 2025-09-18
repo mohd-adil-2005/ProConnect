@@ -316,3 +316,11 @@ align-items: center;
 
 
 } */
+
+
+@media  only screen and  (max-width:600px) {
+  .singleCard{
+    margin-left: -2rem;
+  }
+  
+}

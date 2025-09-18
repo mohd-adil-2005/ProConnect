@@ -25,8 +25,8 @@ const router= useRouter();
     <div className={styles.container}>
     <div className={styles.mainContainer}>
       <div className={styles.container_Left}>
-         <p>Connect with friends without Exaggeration</p>
-         <p> A true social media platfrom, with stories with no blufs</p>
+         <p className={styles.para}>Connect with friends without Exaggeration</p>
+         <p  className={styles.para}> A true social media platfrom, with stories with no blufs</p>
          <div onClick={()=>{router.push("/login")}} className={styles.buttonJoin}>
           <p>Join Now</p>
          </div>
