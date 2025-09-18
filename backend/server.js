@@ -19,7 +19,10 @@ async function main() {
 app.use(cors({
   origin: [
     "https://proconnect-sandy.vercel.app", // ✅ remove trailing slash
-    
+    "https://proconnect-git-main-mohd-adil-2005s-projects.vercel.app",
+    "https://proconnect-bvb9uscyu-mohd-adil-2005s-projects.vercel.app",
+     "http://localhost:3000"
+
   ],
   credentials: true // optional since you use localStorage, not cookies
 }));
