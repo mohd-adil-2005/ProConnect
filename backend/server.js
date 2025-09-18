@@ -18,9 +18,6 @@ async function main() {
 }
 
 
-
-const cors = require('cors');
-
 const allowedOrigins = [
   "https://proconnect-sandy.vercel.app", // ✅ remove trailing slash
     "https://proconnect-git-main-mohd-adil-2005s-projects.vercel.app",
