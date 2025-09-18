@@ -1,5 +1,5 @@
 
-import UserLayout from "@/layout/userLayout";
+import UserLayout from "@/layout/userlayout";
 import DashboardLayout from "@/layout/dasboardLayout";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
