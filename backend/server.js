@@ -17,11 +17,11 @@ async function main() {
 
 }
 app.use(cors({
-   origin: [
-     "https://proconnect-sandy.vercel.app/", // ✅ new Vercel frontend URL
-      "http://localhost:3000"             // ✅ for local dev
-    ],
-  credentials: true
+  origin: [
+    "https://proconnect-sandy.vercel.app", // ✅ remove trailing slash
+    "http://localhost:3000"
+  ],
+  credentials: true // optional since you use localStorage, not cookies
 }));
 app.use(express.json());
 
