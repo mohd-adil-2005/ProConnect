@@ -71,7 +71,7 @@ MongoDB (local instance or a cloud service like MongoDB Atlas)
 Installation & Setup
 Clone the repository:
 
-git clone [https://github.com/mohd-adil-2005/Pro-Connect]
+git clone [https://github.com/mohd-adil-2005/ProConnect]
 cd linkedinclone
 
 Setup the Backend:
