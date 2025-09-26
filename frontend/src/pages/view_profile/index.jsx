@@ -161,7 +161,7 @@ export default function ViewProfile({ userProfile }) {
                     `/user/user_profile_download?id=${userProfile.userId?._id}`
                   );
                   window.open(
-                    `${BASE_URL}/uploads/${response.data.message}`,
+                    `${BASE_URL}uploads/${response.data.message}`,
                     "_blank"
                   );
                   console.log(response.data.message);
