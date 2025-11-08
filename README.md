@@ -1,7 +1,6 @@
 # Pro-Connect
 
 
-LinkedIn Clone 🚀
 A full-stack web application that replicates the core functionalities of LinkedIn. This project allows users to create professional profiles, connect with others, create posts, and engage with content in a shared feed.
 
 ✨ Features
@@ -43,7 +42,7 @@ File Uploads: Multer & Local Storage
 📂 Project Structure
 The repository is organized into two main directories:
 
-LINKEDINCLONE/
+ProConnect/
 ├── backend/               # Node.js & Express.js server
 │   ├── Controllers/
 │   ├── Models/
