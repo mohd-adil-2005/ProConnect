@@ -139,7 +139,7 @@ color: white;
 
 
 .optionContainer{
-    gap:1rem;
+    
     display:flex;
     justify-content: space-between;
     padding: 1.2rem;
@@ -325,3 +325,19 @@ align-items: center;
   }
   
 }
+
+
+
+@media  only screen and  (min-width:600px) {
+   .optionContainer{
+    gap: 180px;
+    display:flex;
+    justify-content: space-between;
+    padding: 1.2rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgb(129, 129, 129);
+    border-radius: 0px 0px 10px 10px;
+   }
+  
+}
+
