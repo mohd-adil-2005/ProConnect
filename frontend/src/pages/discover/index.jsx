@@ -36,8 +36,8 @@ function Discover() {
                     <img src={`${BASE_URL}uploads/${users.userId?.profilePicture}`}alt="avtar"  style={{width:"10%"}}/>
                    <div className="">
 
-                     <h3 className={styles.userName}>{users.userId.name}</h3>
-                    <p style={{color:"gray"}} className={styles.userName}>{users.userId.username}</p>
+                     <h3 className={styles.userName}>{users.userId?.name}</h3>
+                    <p style={{color:"gray"}} className={styles.userName}>{users.userId?.username}</p>
                    </div>
                    
                     <hr />

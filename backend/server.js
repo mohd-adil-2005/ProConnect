@@ -53,6 +53,9 @@ main().catch(err => console.log(err));
 app.get('/', (req, res) => {
   res.send('Hello World! Linkedin project ');
 })
+app.get("/test", (req,res)=>{
+  res.json({message:" Final test  Api is working properly !"});
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

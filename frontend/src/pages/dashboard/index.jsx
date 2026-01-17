@@ -45,6 +45,7 @@ function dashboard() {
     setFileContent("");
     dispatch(allPosts());
   };
+///  this is the complete layout of the dashboard actulllyy okay 
 
   if (!authState.user) {
     return (
@@ -117,7 +118,7 @@ function dashboard() {
                         <div   className={styles.singleCard_profileContainer}>
                           <img style={{cursor:"pointer"}}  onClick={()=>{router.push(`/view_profile?username=${post.userId.username}`)}} 
 
-                            src={`${BASE_URL}uploads/${post.userId.profilePicture}`}
+                            src={`${BASE_URL}uploads/${post.userId?.profilePicture}`}
                             alt="profilePicture" 
                             name="profile"
                           />
@@ -125,9 +126,9 @@ function dashboard() {
                             <div   
                             className={styles.postDeleteIconContainer}>
                               <p style={{ fontWeight: "bold" }}>
-                                {post.userId.name}
+                                {post.userId?.name}
                               </p>
-                              {post.userId._id ===
+                              {post.userId?._id ===
                                 authState.user.userId._id && (
                                 <div
                                   onClick={async () => {
@@ -157,7 +158,7 @@ function dashboard() {
                               )}
                             </div>
                             <p style={{ color: "grey" }}>
-                              @{post.userId.username}
+                              @{post.userId?.username}
                             </p>
 
                             <p style={{ paddingTop: "1.3rem" }}>{post.body}</p>

@@ -3,6 +3,9 @@ import styles from "./styles.module.css";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/config/redux/reducer/authreducer";
+
+
+
 function NavbarComponent() {
 
 
@@ -30,7 +33,7 @@ function NavbarComponent() {
 
 
     const authState= useSelector((state)=>state.auth);
-    console.log("term "+authState.user)
+    console.log("authState.user (console) "+authState.user)
   return (
     <div className={styles.container}>
       <nav className={styles.navBar}>
