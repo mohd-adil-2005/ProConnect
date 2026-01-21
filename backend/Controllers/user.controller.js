@@ -9,7 +9,7 @@ import fs from "fs";
 import ConnectionRequest from "../Models/connectionModel.js";
 import { profile } from "console";
 
-
+import cunvertUserDataTOPDF from "../utils/cunvertUserDataToPDF.js";
 
 
 // const cunvertUserDataTOPDF= async (userData)=>{
@@ -38,56 +38,60 @@ import { profile } from "console";
 //     return outputPath;
 
 // }
-const cunvertUserDataTOPDF = async (userData) => {
-  return new Promise((resolve, reject) => {
-    const doc = new PDFDocument({ margin: 40 });
-    const outputPath = crypto.randomBytes(32).toString("hex") + ".pdf";
-    const stream = fs.createWriteStream("uploads/" + outputPath);
-    doc.pipe(stream);
 
-    // Draw profile image at the top center
-    let imageHeight = 100;
-    let imageY = 40;
-    try {
-      if (userData?.userId?.profilePicture) {
-        doc.image(
-          `uploads/${userData.userId.profilePicture}`,
-          doc.page.width / 2 - imageHeight / 2,
-          imageY,
-          { width: imageHeight, height: imageHeight }
-        );
-      }
-    } catch (err) {
-      console.log(err);
-    }
 
-    // Move below the image
-    let textStartY = imageY + imageHeight + 20;
-    doc.y = textStartY;
-    doc.fontSize(18).text(`${userData.userId.name}`, { align: "center", underline: true });
-    doc.moveDown(0.5);
-    doc.fontSize(14).text(`Username: ${userData.userId.username}`, { align: "center" });
-    doc.fontSize(14).text(`Email: ${userData.userId.email}`, { align: "center" });
-    doc.moveDown();
-    doc.fontSize(12).text(`Bio: ${userData.bio || "Hi,I am Full Stack MERN Develoer "}`, { align: "left" });
-    doc.fontSize(12).text(`Current Position: ${userData.currentPost || "@Academor"}`, { align: "left" });
 
-    // Work experience
-    doc.moveDown();
-    doc.fontSize(14).text("Work Experience:", { underline: true });
-    (userData.postwork || []).forEach((work, index) => {
-      doc.moveDown(0.5);
-      doc.fontSize(12).text(`Company: ${work.company}`);
-      doc.fontSize(12).text(`Position: ${work.position}`);
-      doc.fontSize(12).text(`Years: ${work.years}`);
-    });
+///786
+// const cunvertUserDataTOPDF = async (userData) => {
+//   return new Promise((resolve, reject) => {
+//     const doc = new PDFDocument({ margin: 40 });
+//     const outputPath = crypto.randomBytes(32).toString("hex") + ".pdf";
+//     const stream = fs.createWriteStream("uploads/" + outputPath);
+//     doc.pipe(stream);
 
-    doc.end();
+//     // Draw profile image at the top center
+//     let imageHeight = 100;
+//     let imageY = 40;
+//     try {
+//       if (userData?.userId?.profilePicture) {
+//         doc.image(
+//           `uploads/${userData.userId.profilePicture}`,
+//           doc.page.width / 2 - imageHeight / 2,
+//           imageY,
+//           { width: imageHeight, height: imageHeight }
+//         );
+//       }
+//     } catch (err) {
+//       console.log(err);
+//     }
 
-    stream.on("finish", () => resolve(outputPath));
-    stream.on("error", (err) => reject(err));
-  });
-};
+//     // Move below the image
+//     let textStartY = imageY + imageHeight + 20;
+//     doc.y = textStartY;
+//     doc.fontSize(18).text(`${userData.userId.name}`, { align: "center", underline: true });
+//     doc.moveDown(0.5);
+//     doc.fontSize(14).text(`Username: ${userData.userId.username}`, { align: "center" });
+//     doc.fontSize(14).text(`Email: ${userData.userId.email}`, { align: "center" });
+//     doc.moveDown();
+//     doc.fontSize(12).text(`Bio: ${userData.bio || "Hi,I am Full Stack MERN Develoer "}`, { align: "left" });
+//     doc.fontSize(12).text(`Current Position: ${userData.currentPost || "@Academor"}`, { align: "left" });
+
+//     // Work experience
+//     doc.moveDown();
+//     doc.fontSize(14).text("Work Experience:", { underline: true });
+//     (userData.postwork || []).forEach((work, index) => {
+//       doc.moveDown(0.5);
+//       doc.fontSize(12).text(`Company: ${work.company}`);
+//       doc.fontSize(12).text(`Position: ${work.position}`);
+//       doc.fontSize(12).text(`Years: ${work.years}`);
+//     });
+
+//     doc.end();
+
+//     stream.on("finish", () => resolve(outputPath));
+//     stream.on("error", (err) => reject(err));
+//   });
+// };
 
 
 
@@ -248,8 +252,8 @@ export const upload_profilepictuer= async(req,res)=>{
             
       return res.status(400).json({ message: req.file });
     }
-        console.log(req.file.filename);
-        user.profilePicture= req.file.filename;
+        console.log("location 786,,,,",req.file.location);
+        user.profilePicture= req.file.location;
        await  user.save();
         return res.json({message:"Profile picture updated successfully"});
     }
@@ -342,29 +346,79 @@ export const getUserProfile= async(req,res)=>{
 
 
 
-export const userProfileDownload= async (req,res)=>{
-    try{
-        const user_id= req.query.id;
-        if(!user_id) return res.json({message:"userId not found "});
+// export const userProfileDownload= async (req,res)=>{
+//     try{
+//         const user_id= req.query.id;
+//         if(!user_id) return res.json({message:"userId not found "});
         
       
-        const userProfile= await Profile.findOne({userId:user_id}).populate('userId', 'name username  email profilePicture')
-       console.log("the profile resume ",userProfile);
-        if(!userProfile){
-            return res.status(404).json({message:"userprofile not found"});
-        }
-        let outputPath =  await cunvertUserDataTOPDF(userProfile);
-        return res.json({"message":outputPath});
-    }
-    catch(err){
-        return res.status(500).json({message:err.mesage});
-    }
-}
+//         const userProfile= await Profile.findOne({userId:user_id}).populate('userId', 'name username  email profilePicture')
+//        console.log("the profile resume ",userProfile);
+//         if(!userProfile){
+//             return res.status(404).json({message:"userprofile not found"});
+//         }
+//         let outputPath =  await cunvertUserDataTOPDF(userProfile);
+//         return res.json({"message":outputPath});
+//     }
+//     catch(err){
+//         return res.status(500).json({message:err.mesage});
+//     }
+// }
 //ConnectionRequest logic 
 //send conection request
 
+//786 
+import { uploadPdfToS3 } from "../utils/uploadPdfToS3.js";
+// export const userProfileDownload = async (req, res) => {
+//   try {
+//     const user_id = req.query.id;
+//     if (!user_id) {
+//       return res.status(400).json({ message: "User ID missing" });
+//     }
 
+//     const userProfile = await Profile
+//       .findOne({ userId: user_id })
+//       .populate("userId", "name username email profilePicture");
 
+//     if (!userProfile) {
+//       return res.status(404).json({ message: "Profile not found" });
+//     }
+
+//     const pdfPath = await convertUserDataToPDF(userProfile);
+//     const s3Url = await uploadPdfToS3(pdfPath);
+
+//     return res.json({ message: s3Url });
+//   } catch (err) {
+//     console.error("PDF DOWNLOAD ERROR:", err);
+//     return res.status(500).json({ message: "PDF generation failed" });
+//   }
+// };
+import cunvertUserDataToPDF from "../utils/cunvertUserDataToPDF.js";
+
+export const userProfileDownload = async (req, res) => {
+  try {
+    const user_id = req.query.id;
+    if (!user_id) return res.status(400).json({ message: "User ID missing" });
+
+    const userProfile = await Profile.findOne({ userId: user_id })
+      .populate("userId", "name username email profilePicture");
+
+    if (!userProfile) return res.status(404).json({ message: "Profile not found" });
+
+    // 1. Generate PDF locally
+    const pdfPath = await cunvertUserDataToPDF(userProfile);
+    
+    // 2. Upload to S3 (Now this function exists!)
+    const s3Url = await uploadPdfToS3(pdfPath);
+    console.log("PDF uploaded to S3:", s3Url);
+    // 3. Send URL to frontend
+    return res.json({ message: s3Url });
+
+  } catch (err) {
+    console.error("PDF DOWNLOAD ERROR:", err);
+    return res.status(500).json({ message: "PDF generation failed" });
+  }
+};
 export const sendConnectionRequest= async(req, res)=>{
     const { token, connectionId } = req.body;
     try {

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { allPosts } from "../../action/postaction";
+import { allPosts,createPost } from "../../action/postaction";
 import { getCommentsByPost } from "../../action/postaction";
 
 const initialState={
@@ -60,6 +60,23 @@ export const postreducer= createSlice({
             state.message="Comments fetched successfully"
         })
         .addCase(getCommentsByPost.rejected,(state,action)=>{
+            state.isloading=false
+            state.isError=true
+            state.isSuccess=false
+            state.message=action.payload
+        })
+        .addCase(createPost.pending,(state)=>{
+            state.isloading=true
+            state.message="Creating post..."
+        })
+        .addCase(createPost.fulfilled,(state,action)=>{
+            state.isloading=false
+            state.isError=false
+            state.isSuccess=true
+            state.posts.unshift(action.payload)
+            state.message="Post created successfully"
+        })
+        .addCase(createPost.rejected,(state,action)=>{
             state.isloading=false
             state.isError=true
             state.isSuccess=false

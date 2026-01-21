@@ -9,20 +9,20 @@ import User from "../Models/userModel.js";
 
 
 //multer profile picture here
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
- filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname); // keep file extension
-    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
-  }
-})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads')
+//   },
+//  filename: function (req, file, cb) {
+//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//     const ext = path.extname(file.originalname); // keep file extension
+//     cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+//   }
+// })
 
-const upload = multer({ storage })   
-
-
+// const upload = multer({ storage })   
+  import upload from "../middleware/upload.js";
+import multerS3 from "multer-s3";
 router.route("/update_profile").post(upload.single("profile"),upload_profilepictuer);
 
 router.route("/register").post(register);

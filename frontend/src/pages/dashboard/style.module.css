@@ -93,7 +93,8 @@ color: white;
    }
 
    .singleCard_profileContainer >img{
-    width: 10%;
+    width: 8%;
+    height: 8%;
     border-radius: 50%;
    
    }

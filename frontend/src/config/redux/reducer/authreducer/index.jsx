@@ -48,7 +48,7 @@ export const authreducer= createSlice({
         builder
         .addCase(loginUser.pending,(state)=>{
             state.isloading= true;
-            state.message="you geting  in the Application"
+            state.message="you getting  in the Application"
         })
         .addCase(loginUser.fulfilled,(state, action)=>{
             state.pending= false;
