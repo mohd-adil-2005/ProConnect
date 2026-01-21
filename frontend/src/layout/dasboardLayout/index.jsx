@@ -93,7 +93,7 @@ function DashboardLayout({ children }) {
             authState.all_profiles.map((profile) => {
               return (
                 <div>
-                  <p>{profile.userId.name}</p>
+                  <p>{profile.userId?.name}</p>
                 </div>
               );
             })}

@@ -17,8 +17,6 @@ all_profiles_fetched: false,
 postId: "",
 Comment:[],
 
-
-
 }
 export const authreducer= createSlice({
     name:"auth",
@@ -48,7 +46,7 @@ export const authreducer= createSlice({
         builder
         .addCase(loginUser.pending,(state)=>{
             state.isloading= true;
-            state.message="you geting  in the Application"
+            state.message="you getting in the Application"
         })
         .addCase(loginUser.fulfilled,(state, action)=>{
             state.pending= false;
