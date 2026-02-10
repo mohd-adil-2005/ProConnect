@@ -31,32 +31,33 @@ function dashboard() {
   const [commnetText, setCommnetText] = useState("");
 
   useEffect(() => {
+  const fetchData = async () => {
     if (authState.isTokenThere) {
-      // Dispatch action to fetch posts
-      // Assuming you have an action to fetch posts
-
-       await dispatch(getAboutUser({ token: localStorage.getItem("token") }));
-       await dispatch(allPosts());
-      
+      await dispatch(getAboutUser({ token: localStorage.getItem("token") }));
+      await dispatch(allPosts());
     }
-  }, [authState.isTokenThere]);
+  };
+
+  fetchData();
+}, [authState.isTokenThere]);
+
  
     
 
     useEffect(()=>{
 
       if(postState.ispostdelete){
-        toast.success("Post Deleted Successfully",{duration:2000},
-          {
-            style: {
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              padding: '12px 24px',
-              borderRadius: '4px',
-              fontSize: '16px',
-            },
-          }
-        );
+      toast.success("Post Deleted Successfully", {
+  duration: 2000,
+  style: {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "12px 24px",
+    borderRadius: "4px",
+    fontSize: "16px",
+  },
+});
+
       }
        
 
@@ -86,6 +87,13 @@ function dashboard() {
      await dispatch(allPosts());
   };
 ///  this is the complete layout of the dashboard actulllyy okay 
+ useEffect(() => {
+  if (postState.isCreated) {
+    toast.success("Post Created Successfully", {
+      duration: 2000,
+    });
+  }
+}, [postState.isCreated]);
 
   if (!authState.user) {
     return (
