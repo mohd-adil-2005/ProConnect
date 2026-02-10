@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) { useEffect(() => {
     import('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
   return <Provider store= {store}>
-       <Toaster  position="top-right"/>
+       <Toaster  position="top-right" richColors/>
   <Component {...pageProps} />
   
   </Provider>;
