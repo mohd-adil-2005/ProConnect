@@ -404,12 +404,45 @@ function dashboard() {
             <div className={styles.wrapper}>
               <div className={styles.createPostContainer}>
                 {" "}
-                <img
+                {/* <img
                   // src={`${BASE_URL}uploads/${authState.user?.userId?.profilePicture}`}
                   src={authState.user?.userId?.profilePicture}
                   alt="Profile"
                   className={styles.userProfile}
-                />
+                /> */}
+                     {authState.user?.userId?.profilePicture && 
+ authState.user.userId.profilePicture !== 'default.jpg' && 
+ authState.user.userId.profilePicture.startsWith('http') ? (
+    <img  
+       
+        src={authState.user.userId.profilePicture} 
+        alt="Profile"
+        style={{ 
+            width: '50px', 
+            height: '50px', 
+            borderRadius: '50%',
+            objectFit: 'cover'
+        }}
+        onError={(e) => {
+            e.target.style.display = 'none'; // Hide broken image
+        }}
+    />
+) : (
+    <div style={{ 
+        width: '50px', 
+        height: '50px', 
+        borderRadius: '50%', 
+        backgroundColor: '#4CAF50',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        color: 'white'
+    }}>
+        {authState.user?.userId?.username?.[0]?.toUpperCase() || 'U'}
+    </div>
+)}
                 <textarea
                   onChange={(e) => setPostContent(e.target.value)}
                   value={postContent}
