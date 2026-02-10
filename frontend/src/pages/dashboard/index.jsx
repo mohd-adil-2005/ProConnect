@@ -35,8 +35,8 @@ function dashboard() {
       // Dispatch action to fetch posts
       // Assuming you have an action to fetch posts
 
-      dispatch(getAboutUser({ token: localStorage.getItem("token") }));
-      dispatch(allPosts());
+       await dispatch(getAboutUser({ token: localStorage.getItem("token") }));
+       await dispatch(allPosts());
       
     }
   }, [authState.isTokenThere]);
