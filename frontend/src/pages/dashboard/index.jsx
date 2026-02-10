@@ -1,5 +1,6 @@
 
-
+'use client'
+import { toast } from 'sonner';
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -40,13 +41,49 @@ function dashboard() {
     }
   }, [authState.isTokenThere]);
  
+    
+
+    useEffect(()=>{
+
+      if(postState.ispostdelete){
+        toast.success("Post Deleted Successfully",{duration:2000},
+          {
+            style: {
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '12px 24px',
+              borderRadius: '4px',
+              fontSize: '16px',
+            },
+          }
+        );
+      }
+       
+
+    },[postState.ispostdelete]);
+
+
 
   const handleUpload = async () => {
     await dispatch(createPost({ file: fileContent, body: postContent }));
+   if(postState.isCreated){
+    toast.success("Post Created Successfully",{duration:2000},
+    {
+      style: {
+        backgroundColor: '#4CAF50',
+        color: 'white',
+        padding: '12px 24px',
+        borderRadius: '4px',
+        fontSize: '16px',
+      },
+    }
+  );
+   }
     setPostContent("");
     setFileContent(null);
-    console.log("gtgtgtgtgtgtgtgtgt", fileContent);
-    dispatch(allPosts());
+    
+   
+     await dispatch(allPosts());
   };
 ///  this is the complete layout of the dashboard actulllyy okay 
 

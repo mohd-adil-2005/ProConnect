@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { allPosts,createPost } from "../../action/postaction";
+import { allPosts,createPost, deletePost } from "../../action/postaction";
 import { getCommentsByPost } from "../../action/postaction";
 
 const initialState={
 posts:[],
 isError:false,
+isCreated:false,
+ispostdelete:false,
 isSuccess:false,
 isloading:false,
 postFetched:false,
@@ -68,11 +70,13 @@ export const postreducer= createSlice({
         .addCase(createPost.pending,(state)=>{
             state.isloading=true
             state.message="Creating post..."
+            state.isCreated=false
         })
         .addCase(createPost.fulfilled,(state,action)=>{
             state.isloading=false
             state.isError=false
             state.isSuccess=true
+            state.isCreated=true
             state.posts.unshift(action.payload)
             state.message="Post created successfully"
         })
@@ -80,8 +84,29 @@ export const postreducer= createSlice({
             state.isloading=false
             state.isError=true
             state.isSuccess=false
+            state.isCreated=false
             state.message=action.payload
         })
+        .addCase(deletePost.pending, (state,action)=>{
+            state.isloading=true
+            state.message="Deleting post..."
+              state.ispostdelete = false;
+        })
+        .addCase(deletePost.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.isSuccess = true;
+            state.ispostdelete = true;
+            state.posts = state.posts.filter(post => post.id !== action.payload.id);
+            state.message = "Post deleted successfully";
+        })
+        .addCase(deletePost.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.isSuccess = false;
+              state.ispostdelete = false;
+            state.message = action.payload;
+        });
     }
 } 
 )
