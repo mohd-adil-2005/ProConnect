@@ -421,7 +421,8 @@ function dashboard() {
             width: '50px', 
             height: '50px', 
             borderRadius: '50%',
-            objectFit: 'cover'
+            objectFit: 'cover',
+            flexShrink:0
         }}
         onError={(e) => {
             e.target.style.display = 'none'; // Hide broken image
