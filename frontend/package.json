@@ -17,7 +17,8 @@
     "react-dom": "19.1.0",
     "react-redux": "^9.2.0",
     "react-toastify": "^11.0.5",
-    "router": "^2.2.0"
+    "router": "^2.2.0",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

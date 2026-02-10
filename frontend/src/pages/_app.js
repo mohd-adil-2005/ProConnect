@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { Toaster } from 'sonner';
 // import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { useEffect } from "react";
 import { Provider } from "react-redux";
@@ -9,7 +10,7 @@ export default function App({ Component, pageProps }) { useEffect(() => {
     import('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
   return <Provider store= {store}>
-  <Component {...pageProps} /> 
- 
+  <Component {...pageProps} />
+   <Toaster  position="top-right"/>
   </Provider>;
 }
