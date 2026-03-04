@@ -267,8 +267,10 @@ import { useSearchParams } from "next/navigation";
 import { clientServer } from "@/config";
 import UserLayout from "@/layout/userlayout";
 import DashboardLayout from "@/layout/dasboardLayout";
+import Avatar from "@/Component/Avatar";
+import VerifiedBadge from "@/Component/VerifiedBadge";
 import styles from "./[username].module.css";
-import { BASE_URL } from "@/config";
+import { BASE_URL, getProfileImageUrl } from "@/config";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -366,16 +368,24 @@ export default function ViewProfile({ userProfile }) {
 
           {/* Profile Header */}
           <div className={styles.header}>
-            <img
-              // src={`${BASE_URL}uploads/${userProfile.userId?.profilePicture}`}
-       src={userProfile.userId?.profilePicture}
-              alt="Profile Picture"
+            <Avatar
+              src={getProfileImageUrl(userProfile.userId?.profilePicture)}
+              name={userProfile.userId?.name}
+              username={userProfile.userId?.username}
+              size={120}
               className={styles.profilePic}
             />
 
             <div className="userInfoConnect">
               <div className={styles.userInfo}>
-                <h2 className={styles.name}>{userProfile.userId?.name}</h2>
+                <h2 className={styles.name}>
+                  <span className={styles.nameWithBadge}>
+                    {userProfile.userId?.name}
+                    {userProfile.userId?.isVerified && (
+                      <VerifiedBadge size={22} />
+                    )}
+                  </span>
+                </h2>
                 <p className={styles.headline}>
                   {userProfile.currentPost || "@Academor"}
                 </p>

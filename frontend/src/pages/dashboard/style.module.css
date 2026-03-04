@@ -1,20 +1,25 @@
 .createPostContainer {
   display: flex;
-  height: 10svh;
-  width:95%;
-  padding-inline:0.8rem;
-    align-items: center;
-  gap:1.3rem;
+  min-height: 56px;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem;
+  align-items: flex-start;
+  gap: 0.75rem;
   background: rgb(255, 246, 246);
-  border-radius: 20px;
+  border-radius: 16px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .scrollComponent {
-    justify-content: center;
-    display:flex;
-    width: 100%;
-  
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
 }
 
 
@@ -32,83 +37,111 @@
 
 } */
 
-.createPostContainer >textarea{
-    width:100%;
-
+.createPostContainer > textarea {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  box-sizing: border-box;
 }
 
-.Fab>svg{
-
-width:fit-content;
-height: 40px;
-color: white;
-
-
+.Fab > svg {
+  width: 20px;
+  height: 20px;
+  color: white;
 }
-.Fab{
-    background: blue;
-    border-radius: 100%;
-    justify-content: center;
-    display:flex;
 
+.Fab {
+  background: blue;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
 }
 
 .textareaOfContent {
-    width: 100%;
-    height: 60%;
-    border: 1px solid silver;
-    outline: none;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  max-height: 120px;
+  border: 1px solid silver;
+  outline: none;
   border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  padding-inline: 1.5rem;
-    padding-block: 0.5rem;
-    
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+  resize: vertical;
 }
 
-
-.uploadButton{
-    position: absolute;
-    right: 0;
-    bottom: -30px;
-    background: blue;
-    color: white;
-    border-radius:10px;
-    padding-inline: 1.2rem;
-    padding-block:0.8rem;
-    cursor:pointer;
-
-
-
-
+.uploadButton {
+  position: absolute;
+  right: 0.75rem;
+  bottom: -28px;
+  background: blue;
+  color: white;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  cursor: pointer;
 }
 
 .singleCard{
     width: 100%;
     border-radius: 10px 10px 0px 0px;
     border-bottom: 1px solid rgb(129, 129, 129);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
    }
    .singleCard_profileContainer{
-    display:flex;
+    display: flex;
     align-items: flex-start;
-    gap:1.2rem;
+    gap: 1.2rem;
     padding: 1.2rem;
     padding-right: 3.4rem;
+    flex: 0 0 auto;
    }
 
-   .singleCard_profileContainer >img{
+   .singleCard_profileContainer > img{
     width: 8%;
     height: 8%;
     border-radius: 50%;
-   
    }
 
-
-   .wrapper{
-    display:flex;
+   /* Content column: meta + body + media; allows long text to flow */
+   .singleCard_content{
+    display: flex;
     flex-direction: column;
-    gap:1.3rem;
-    width:100%;
-    max-width:80%;
+    flex: 1;
+    min-width: 0;
+   }
+
+   .postHandle{
+    color: #6b7280;
+    font-size: 0.9375rem;
+    margin: 0.15rem 0 0 0;
+   }
+
+   .postBody{
+    margin: 1rem 0 0 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+   }
+
+   .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    width: 100%;
+    max-width: 80%;
+    box-sizing: border-box;
    }
 
 
@@ -142,27 +175,42 @@ color: white;
 
 
 
+/* Action bar: same height and alignment for every post, never shrinks */
 .optionContainer{
-    display:flex;
-    justify-content: space-between;
-    padding: 1.2rem;
-    padding-top: 0.6rem;
-    border-top: 1px solid rgb(129, 129, 129);
-    border-radius: 0px 0px 10px 10px;
-   }
-
-   .optionContainer >div{
-    display:flex;
+    display: flex;
     align-items: center;
-    gap:0.6rem;
-    cursor:pointer;
-
+    justify-content: flex-start;
+    gap: 2rem;
+    flex-shrink: 0;
+    min-height: 48px;
+    padding: 0.75rem 1.2rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgb(229, 231, 235);
+    border-radius: 0 0 10px 10px;
+    background: rgb(249, 250, 251);
    }
 
-   .optionContainer >div>svg{
-    width:20px;
-    height:20px;
-  
+   .optionContainer > div{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    min-height: 2rem;
+    padding: 0.25rem 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #374151;
+   }
+
+   .optionContainer > div:hover{
+    color: #111827;
+   }
+
+   .optionContainer > div > svg{
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
    }
 
  
@@ -281,16 +329,155 @@ color: white;
   justify-content: center;
 }
 
-@media   screen and (max-width:600px) {
-.AllCommentsContainer{
+@media screen and (max-width: 600px) {
+  .createPostContainer {
+    flex-wrap: nowrap;
+    padding: 0.6rem;
+    gap: 0.5rem;
+    min-height: 52px;
+    animation: fadeInUp var(--anim-duration-normal) var(--anim-ease-out);
+    transition: box-shadow var(--anim-duration-fast) ease, transform var(--anim-duration-fast) ease;
+  }
 
-  width:80svw;
+  .createPostContainer:active {
+    transform: scale(0.995);
+  }
 
+  .createPostContainer .textareaOfContent {
+    min-height: 40px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9375rem;
+  }
 
-}
+  .Fab {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
 
+  .Fab > svg {
+    width: 18px;
+    height: 18px;
+  }
 
-  
+  .uploadButton {
+    right: 0.5rem;
+    bottom: -26px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .scrollComponent {
+    padding: 0 0.25rem;
+  }
+
+  .wrapper {
+    max-width: 100%;
+    padding: 0 0.25rem;
+    gap: 1rem;
+  }
+
+  .singleCard {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 12px;
+    animation: fadeInUp var(--anim-duration-normal) var(--anim-ease-out) both;
+    transition: transform var(--anim-duration-fast) ease, box-shadow var(--anim-duration-fast) ease;
+  }
+
+  .singleCard:nth-child(1) { animation-delay: 0.05s; }
+  .singleCard:nth-child(2) { animation-delay: 0.1s; }
+  .singleCard:nth-child(3) { animation-delay: 0.15s; }
+  .singleCard:nth-child(4) { animation-delay: 0.2s; }
+  .singleCard:nth-child(5) { animation-delay: 0.25s; }
+  .singleCard:nth-child(6) { animation-delay: 0.3s; }
+  .singleCard:nth-child(7) { animation-delay: 0.35s; }
+  .singleCard:nth-child(8) { animation-delay: 0.4s; }
+  .singleCard:nth-child(9) { animation-delay: 0.45s; }
+  .singleCard:nth-child(n+10) { animation-delay: 0.5s; }
+
+  .singleCard:active {
+    transform: scale(0.99);
+  }
+
+  .singleCard_profileContainer {
+    padding: 0.75rem;
+    padding-right: 1rem;
+    gap: 0.75rem;
+  }
+
+  .singleCard_profileContainer > *:first-child {
+    flex-shrink: 0;
+  }
+
+  .postBody {
+    font-size: 0.9375rem;
+    margin-top: 0.5rem;
+  }
+
+  .postHandle {
+    font-size: 0.875rem;
+  }
+
+  .postDeleteIconContainer p {
+    font-size: 0.9375rem;
+    word-break: break-word;
+  }
+
+  .optionContainer {
+    gap: 1rem;
+    padding: 0.5rem 0.75rem;
+    min-height: 44px;
+    transition: background-color var(--anim-duration-fast) ease;
+  }
+
+  .optionContainer > div {
+    transition: transform var(--anim-duration-fast) var(--anim-ease-out);
+  }
+
+  .optionContainer > div:active {
+    transform: scale(0.94);
+  }
+
+  .optionContainer > div {
+    font-size: 0.8125rem;
+  }
+
+  .optionContainer > div > svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .AllCommentsContainer {
+    width: 92vw;
+    max-width: 92vw;
+    height: 85vh;
+    max-height: 85vh;
+    padding: 1rem;
+    animation: scaleIn var(--anim-duration-normal) var(--anim-ease-spring);
+    border-radius: 16px;
+  }
+
+  .postCommnetContainer {
+    width: 85%;
+    gap: 0.5rem;
+    bottom: 0.75rem;
+  }
+
+  .postCommnetContainer > input {
+    font-size: 0.9375rem;
+    padding-inline: 0.75rem;
+  }
+
+  .PostCommnetContainer_commentBtn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .singleCommentContainer_avtar p {
+    font-size: 0.9375rem;
+  }
 }
 
 /* .mobileNavBar{
@@ -321,10 +508,3 @@ align-items: center;
 
 } */
 
-
-@media  only screen and  (max-width:600px) {
-  .singleCard{
-    margin-left: -2rem;
-  }
-  
-}

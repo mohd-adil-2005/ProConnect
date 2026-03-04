@@ -4,10 +4,18 @@ import { useEffect } from "react";
 import { setisTokenThere } from "@/config/redux/reducer/authreducer";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import VerifiedBadge from "@/Component/VerifiedBadge";
+
 function DashboardLayout({ children }) {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const router = useRouter();
+  const pathname = router.pathname || "";
+  const currentUserId = authState.user?.userId?._id;
+  const isActive = (path) => pathname === path || (path !== "/dashboard" && pathname.startsWith(path));
+  const topProfiles = authState.all_profiles_fetched && Array.isArray(authState.all_profiles)
+    ? authState.all_profiles.filter((profile) => profile.userId?.isVerified)
+    : [];
   useEffect(() => {
     if (localStorage.getItem("token") == null) {
       router.push("/login");
@@ -87,23 +95,38 @@ function DashboardLayout({ children }) {
 
         <div className={styles.homeContainer_feedContainer}>{children}</div>
         <div className={styles.homeContainer_extraContainer}>
-          <h3>Top profiles. </h3>
-
-          {authState.all_profiles_fetched &&
-            authState.all_profiles.map((profile) => {
-              return (
-                <div>
-                  <p>{profile.userId.name}</p>
-                </div>
-              );
-            })}
+          <h3>Top profiles</h3>
+          {topProfiles.length === 0 && (
+            <p className={styles.topProfilesEmpty}>No verified profiles yet.</p>
+          )}
+          {topProfiles.map((profile) => {
+            const user = profile.userId;
+            if (!user) return null;
+            const isOwn = currentUserId && user._id && String(currentUserId) === String(user._id);
+            return (
+              <div
+                key={user._id || profile._id}
+                className={styles.topProfileItem}
+                onClick={() => {
+                  if (isOwn) router.push("/profile");
+                  else if (user.username) router.push(`/view_profile?username=${user.username}`);
+                }}
+              >
+                <p className={styles.topProfileName}>
+                  {user.name}
+                  <VerifiedBadge size={16} />
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      <div className={styles.mobileNavBar}>
+      <div className={styles.mobileNavBar} role="navigation" aria-label="Main navigation">
         <div
           onClick={() => router.push("/dashboard")}
-          className={styles.singleitemNavbarView}
+          className={`${styles.singleitemNavbarView} ${isActive("/dashboard") ? styles.activeNavItem : ""}`}
+          aria-current={isActive("/dashboard") ? "page" : undefined}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +146,8 @@ function DashboardLayout({ children }) {
 
         <div
           onClick={() => router.push("/discover")}
-          className={styles.singleitemNavbarView}
+          className={`${styles.singleitemNavbarView} ${isActive("/discover") ? styles.activeNavItem : ""}`}
+          aria-current={isActive("/discover") ? "page" : undefined}
         >
          <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +167,8 @@ function DashboardLayout({ children }) {
 
         <div
           onClick={() => router.push("/my_connections")}
-          className={styles.singleitemNavbarView}
+          className={`${styles.singleitemNavbarView} ${isActive("/my_connections") ? styles.activeNavItem : ""}`}
+          aria-current={isActive("/my_connections") ? "page" : undefined}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

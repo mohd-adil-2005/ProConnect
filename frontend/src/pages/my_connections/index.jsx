@@ -132,7 +132,9 @@
 
 
 
-import { BASE_URL } from "@/config";
+import { BASE_URL, getProfileImageUrl } from "@/config";
+import Avatar from "@/Component/Avatar";
+import VerifiedBadge from "@/Component/VerifiedBadge";
 import { getMyConnectionsRequest } from "@/config/redux/action/authaction";
 import DashboardLayout from "@/layout/dasboardLayout";
 import UserLayout from "@/layout/userlayout";
@@ -147,6 +149,18 @@ function Myconnection() {
   const router = useRouter();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
+  const currentUserId = authState.user?.userId?._id;
+
+  const goToUserProfile = (user) => {
+    if (!user) return;
+    const targetId = user._id;
+    const targetUsername = user.username;
+    if (currentUserId && targetId && String(currentUserId) === String(targetId)) {
+      router.push("/profile");
+    } else if (targetUsername) {
+      router.push(`/view_profile?username=${targetUsername}`);
+    }
+  };
 
   useEffect(() => {
     dispatch(getMyConnectionsRequest({ token: localStorage.getItem("token") }));
@@ -171,11 +185,7 @@ function Myconnection() {
               return (
                 <div
                   className={styles.userCard}
-                  onClick={() => {
-                    router.push(
-                      `/view_profile?username=${user.userId.username}`
-                    );
-                  }}
+                  onClick={() => goToUserProfile(user.userId)}
                 >
                   <div
                     className={styles.layout}
@@ -186,15 +196,20 @@ function Myconnection() {
                     }}
                   >
                     <div className={styles.profilePicture}>
-                      <img
-                        // src={`${BASE_URL}uploads/${user.userId.profilePicture}`}
-                        src={user.userId.profilePicture}
-                        alt="profilePicture"
-                        className=""
+                      <Avatar
+                        src={getProfileImageUrl(user.userId.profilePicture)}
+                        name={user.userId.name}
+                        username={user.userId.username}
+                        size={50}
                       />
                     </div>
                     <div className={styles.userInfo}>
-                      <h3>{user.userId.name}</h3>
+                      <h3 style={{ display: "flex", alignItems: "center" }}>
+                        {user.userId.name}
+                        {user.userId.isVerified && (
+                          <VerifiedBadge size={18} />
+                        )}
+                      </h3>
                       <p className="">{user.userId.username}</p>
                     </div>
 
@@ -222,11 +237,7 @@ function Myconnection() {
               return (
                <div
                   className={styles.userCard}
-                  onClick={() => {
-                    router.push(
-                      `/view_profile?username=${user.userId.username}`
-                    );
-                  }}
+                  onClick={() => goToUserProfile(user.userId)}
                 >
                   <div
                     className={styles.layout}
@@ -237,15 +248,20 @@ function Myconnection() {
                     }}
                   >
                     <div className={styles.profilePicture}>
-                      <img
-                        // src={`${BASE_URL}uploads/${user.userId.profilePicture}`}
-                        src={user.userId.profilePicture}
-                        alt="profilePicture"
-                        className=""
+                      <Avatar
+                        src={getProfileImageUrl(user.userId.profilePicture)}
+                        name={user.userId.name}
+                        username={user.userId.username}
+                        size={50}
                       />
                     </div>
                     <div className={styles.userInfo}>
-                      <h3>{user.userId.name}</h3>
+                      <h3 style={{ display: "flex", alignItems: "center" }}>
+                        {user.userId.name}
+                        {user.userId.isVerified && (
+                          <VerifiedBadge size={18} />
+                        )}
+                      </h3>
                       <p className="">{user.userId.username}</p>
                     </div>
 

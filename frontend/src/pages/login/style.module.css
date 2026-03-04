@@ -92,10 +92,36 @@ flex: 0.6;
 
 
 
-@media only  screen and (max-width:600px) {
-    .cardContainer{
-        flex-direction: column;
-      
-    }
-    
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 1rem;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  .cardContainer {
+    flex-direction: column;
+    width: 95vw;
+    max-width: 95vw;
+    min-height: auto;
+    height: auto;
+  }
+
+  .cardContainer_left {
+    padding: 1.25rem;
+    flex: none;
+  }
+
+  .cardleft_heading {
+    font-size: 1.5rem;
+  }
+
+  .inputcontainers {
+    max-width: 100%;
+  }
+
+  .cardContainer_right {
+    min-height: 120px;
+    padding: 1rem;
+  }
 }

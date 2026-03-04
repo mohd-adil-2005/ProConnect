@@ -1,95 +1,104 @@
-.container{
-
-    font-family:"Poppins";
-    padding: 4rem;
+.container {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 2rem 1.5rem;
 }
 
-.mainContainer{
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 4rem;
-padding-inline: 2rem;
-height: 80vh;
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding-inline: 1rem;
+  min-height: 75vh;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.container_Left{
-    flex: 0.5;
-}
-.container_right{
-    flex: 0.5;
-}
-.container_Left >p:nth-child(1){
-    font-size: 2.9rem;
-    font-weight: bold;
+.container_Left {
+  flex: 0.5;
 }
 
-.container_Left >p:nth-child(2){
-    color:#4d4d4d;
-    font-size: 1.7rem;
-}
-.container_Left >div.buttonJoin{
-    width: fit-content;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.2s;
-    margin-top: 0.8rem;
-   font-size: 1.4rem;
-   background-color: rgb(197, 44, 208);
-   color : white;
-   padding-inline: 1.2rem;
-   padding-block: 0.6rem;
-   border-radius: 20px;
+.container_right {
+  flex: 0.5;
 }
 
-
-
-
-@media only  screen and (max-width:600px) {
-    .mainContainer{
-
-
-        flex-direction: column;
-        gap: 2rem;
-        padding-top: 1.3rem;
-
-    }
-    .container_Left{
-        padding-bottom: 1.3rem;
-        flex: 1;
-        
-    }
-
-    .container_right{
-
-        flex: 1;
-        
-    }
-
-        .container_right img{
-            width: 100%;
-        
-        
-    }
-
-
-
-
-.buttonJoin p{
-    
-    width: fit-content;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.2s;
-    margin-top: 0.2rem;
-   font-size: 1rem;
-   background-color: rgb(197, 44, 208);
-   color : white;
-   padding-inline: 1rem;
-   
-   border-radius: 10px;
-
-
-}
+.headline {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.02em;
 }
 
+.tagline {
+  color: #555;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  margin: 0 0 1.25rem 0;
+}
+
+.container_Left > div.buttonJoin {
+  width: fit-content;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  margin-top: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background-color: rgb(197, 44, 208);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+}
+
+.container_Left > div.buttonJoin p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.container_right img {
+  width: 95%;
+  height: auto;
+  display: block;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .mainContainer {
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: auto;
+    padding-top: 0.5rem;
+  }
+
+  .container_Left {
+    padding-bottom: 0.5rem;
+    flex: 1;
+  }
+
+  .headline {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .tagline {
+    font-size: 0.875rem;
+  }
+
+  .container_Left > div.buttonJoin {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.875rem;
+  }
+
+  .container_right {
+    flex: 1;
+  }
+
+  .container_right img {
+    width: 100%;
+  }
+}

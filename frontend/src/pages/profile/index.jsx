@@ -307,9 +307,11 @@
 // pages/profile.tsx or .jsx
 import DashboardLayout from "@/layout/dasboardLayout";
 import UserLayout from "@/layout/userlayout";
+import Avatar from "@/Component/Avatar";
+import VerifiedBadge from "@/Component/VerifiedBadge";
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
-import { BASE_URL, clientServer } from "@/config";
+import { BASE_URL, clientServer, getProfileImageUrl } from "@/config";
 import { useSelector, useDispatch } from "react-redux";
 import { getAboutUser } from "@/config/redux/action/authaction";
 import { allPosts } from "@/config/redux/action/postaction";
@@ -413,29 +415,34 @@ const[inputDataEdu, setinputDataEdu]= useState({school:"", degree: "", fieldStud
                   id="uploadprofilePicture"
                   style={{ display: "none" }}
                 />
-                <img
-                  // src={`${BASE_URL}uploads/${userProfile.userId?.profilePicture}`}
-                  src={userProfile.userId?.profilePicture}
-                  alt="Profile Picture"
+                <Avatar
+                  src={getProfileImageUrl(userProfile.userId?.profilePicture)}
+                  name={userProfile.userId?.name}
+                  username={userProfile.userId?.username}
+                  size={120}
                   className={styles.profilePic}
                 />
               </div>
 
               <div className={styles.userInfoConnect}>
                 <div className={styles.userInfo}>
-                  {/* <h2 className={styles.name}>{userProfile.userId?.name}</h2> */}
-                  <input
-                    type="text"
-                    className={styles.editname}
-                    value={userProfile.userId.name}
-                    onChange={(e) => {
-                      setuserProfile({
-                        ...userProfile,
-                        userId: { ...userProfile.userId, name: e.target.value },
-                      });
-                      setupdateProfileBtn(true);
-                    }}
-                  />
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                    <input
+                      type="text"
+                      className={styles.editname}
+                      value={userProfile.userId.name}
+                      onChange={(e) => {
+                        setuserProfile({
+                          ...userProfile,
+                          userId: { ...userProfile.userId, name: e.target.value },
+                        });
+                        setupdateProfileBtn(true);
+                      }}
+                    />
+                    {authState.user?.userId?.isVerified && (
+                      <VerifiedBadge size={22} />
+                    )}
+                  </div>
                   <p className={styles.headline}>
                     {authState.user?.postwork[0]?.company || "@Academor"}
                     

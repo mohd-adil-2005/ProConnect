@@ -16,15 +16,38 @@ import {
 import { getAboutUser } from "@/config/redux/action/authaction";
 import UserLayout from "@/layout/userlayout";
 import DashboardLayout from "@/layout/dasboardLayout";
+import Avatar from "@/Component/Avatar";
+import VerifiedBadge from "@/Component/VerifiedBadge";
 import styles from "./style.module.css";
-import { BASE_URL } from "@/config/index";
+import { BASE_URL, getProfileImageUrl } from "@/config/index";
 import { all } from "axios";
 import { resetpostId } from "@/config/redux/reducer/postreducer";
+
+function formatCount(n) {
+  if (n == null || n === undefined) return "0";
+  const num = Number(n);
+  if (num >= 1e6) return (num / 1e6).toFixed(1).replace(/\.0$/, "") + "M";
+  if (num >= 1e3) return (num / 1e3).toFixed(1).replace(/\.0$/, "") + "K";
+  return String(num);
+}
+
 function dashboard() {
   const dispatch = useDispatch();
   const postState = useSelector((state) => state.postsreducer);
   const authState = useSelector((state) => state.auth);
   const router = useRouter();
+  const currentUserId = authState.user?.userId?._id;
+
+  const goToUserProfile = (user) => {
+    if (!user) return;
+    const targetId = user._id;
+    const targetUsername = user.username;
+    if (currentUserId && targetId && String(currentUserId) === String(targetId)) {
+      router.push("/profile");
+    } else if (targetUsername) {
+      router.push(`/view_profile?username=${targetUsername}`);
+    }
+  };
 
   const [postContent, setPostContent] = useState("");
   const [fileContent, setFileContent] = useState(null);
@@ -114,48 +137,13 @@ function dashboard() {
             <div className={styles.wrapper}>
               <div className={styles.createPostContainer}>
                 {" "}
-                {/* <img
-                  // src={`${BASE_URL}uploads/${authState.user?.userId?.profilePicture}`}
-                  src={authState.user?.userId?.profilePicture}
-                  alt="Profile"
-                  className={styles.userProfile}
-                /> */}
-                     {authState.user?.userId?.profilePicture && 
- authState.user.userId.profilePicture !== 'default.jpg' && 
- authState.user.userId.profilePicture.startsWith('http') ? (
-    <img  
-       
-        src={authState.user.userId.profilePicture} 
-        alt="Profile"
-        className="userProfile"
-        style={{
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%",
-    objectFit: "cover",
-    display: "block",
-    aspectRatio: "1 / 1",
-  }}
-        onError={(e) => {
-            e.target.style.display = 'none'; // Hide broken image
-        }}
-    />
-) : (
-    <div style={{ 
-        width: '50px', 
-        height: '50px', 
-        borderRadius: '50%', 
-        backgroundColor: '#4CAF50',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '24px',
-        fontWeight: 'bold',
-        color: 'white'
-    }}>
-        {authState.user?.userId?.username?.[0]?.toUpperCase() || 'U'}
-    </div>
-)}
+                <Avatar
+                  src={getProfileImageUrl(authState.user?.userId?.profilePicture)}
+                  name={authState.user?.userId?.name}
+                  username={authState.user?.userId?.username}
+                  size={50}
+                  onClick={() => router.push("/profile")}
+                />
                 <textarea
                   onChange={(e) => setPostContent(e.target.value)}
                   value={postContent}
@@ -201,26 +189,22 @@ function dashboard() {
                     return (
                       <div key={post._id} className={styles.singleCard}>
                         <div   className={styles.singleCard_profileContainer}>
-                          <img 
-                          style={{
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%",
-    objectFit: "cover",
-    display: "block",
-    aspectRatio: "1 / 1",
-  }} onClick={()=>{router.push(`/view_profile?username=${post.userId.username}`)}} 
-
-                            // src={`${BASE_URL}uploads/${post.userId?.profilePicture}`}
-                            src={post.userId?.profilePicture}
-                            alt="profilePicture" 
-                            name="profile"
+                          <Avatar
+                            src={getProfileImageUrl(post.userId?.profilePicture)}
+                            name={post.userId?.name}
+                            username={post.userId?.username}
+                            size={50}
+                            onClick={() => goToUserProfile(post.userId)}
                           />
-                          <div>
-                            <div   
-                            className={styles.postDeleteIconContainer}>
-                              <p style={{ fontWeight: "bold" }}>
+                          <div className={styles.singleCard_content}>
+                            <div
+                              className={styles.postDeleteIconContainer}
+                            >
+                              <p style={{ fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.25rem" }}>
                                 {post.userId?.name}
+                                {post.userId?.isVerified && (
+                                  <VerifiedBadge size={18} />
+                                )}
                               </p>
                               {post.userId?._id ===
                                 authState.user.userId._id && (
@@ -251,11 +235,11 @@ function dashboard() {
                                 </div>
                               )}
                             </div>
-                            <p style={{ color: "grey" }}>
+                            <p className={styles.postHandle}>
                               @{post.userId?.username}
                             </p>
 
-                            <p style={{ paddingTop: "1.3rem" }}>{post.body}</p>
+                            <p className={styles.postBody}>{post.body}</p>
 
                             <div className={styles.singleCard_image}>
                              
@@ -271,7 +255,7 @@ function dashboard() {
                               /> */}
                             </div>
                             
-                              <div className= {styles.optionContainer}>
+                              <div className={styles.optionContainer}>
                                 <div
                                 
                                 onClick={async()=>{
@@ -287,7 +271,7 @@ function dashboard() {
 </svg>
 
 
-                                  <span style={{fontWeight: "600"}}>{post.likes}</span>
+                                  <span style={{fontWeight: "600"}}>{formatCount(post.likes)}</span>
                                   
                                 </div>
                               
@@ -358,14 +342,18 @@ function dashboard() {
                     <div className={styles.singleCommentContainer} >
 
                       <div className={styles.singleCommentContainer_avtar}>
-                      <img   
-                      
-      style={{cursor:"pointer"}}  onClick={()=>{router.push(`/view_profile?username=${comment.userId.username}`)}} 
-                      
-                                            src={comment.userId?.profilePicture} alt="avtar" className={styles.avtarImg} />
-
-                       <p style={{fontWeight:"500", fontSize:"1.1rem"}}>
+                      <Avatar
+                            src={getProfileImageUrl(comment.userId?.profilePicture)}
+                            name={comment.userId?.name}
+                            username={comment.userId?.username}
+                            size={40}
+                            onClick={() => goToUserProfile(comment.userId)}
+                          />
+                       <p style={{ fontWeight: "500", fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "0.25rem" }}>
                         {comment.userId.name}
+                        {comment.userId?.isVerified && (
+                          <VerifiedBadge size={16} />
+                        )}
                       </p>
                       </div>
                      <div className="">

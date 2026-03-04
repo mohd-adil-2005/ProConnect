@@ -1,0 +1,8 @@
+.avatarImg {
+  flex-shrink: 0;
+}
+
+.avatarInitials {
+  flex-shrink: 0;
+  user-select: none;
+}

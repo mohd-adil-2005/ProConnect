@@ -57,6 +57,12 @@
   margin: 0;
 }
 
+.nameWithBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
 .headline {
   font-size: 16px;
   color: #555;
@@ -124,23 +130,37 @@
 
 
 
-.sendConnectionContainer>button{
-  border: 1px solid rgb( 0, 119, 181);
-  background-color: rgb( 0, 119, 181);
-  color: white;
+.sendConnectionContainer > button {
+  border: 1px solid rgb(0, 119, 181);
+  background-color: #0a66c2;
+  color: #fff;
   height: 2rem;
-  width: 6rem;
-  border-radius: 20px ;
-          width: 100%;
-    border-radius: 20px;
-    border: none;
-    background: #0a66c2;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
- 
-  
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform var(--anim-duration-fast) ease, opacity var(--anim-duration-fast) ease;
+}
 
+.sendConnectionContainer > button:active {
+  transform: scale(0.97);
+}
+
+@media only screen and (max-width: 600px) {
+  .profileContainer {
+    border-radius: 16px;
+    animation: fadeInUp var(--anim-duration-normal) var(--anim-ease-out);
+  }
+
+  .header {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .banner {
+    height: 120px;
+  }
 }
 
 

@@ -1,3 +1,4 @@
+import "@/styles/globals.css";
 import { Toaster } from "sonner";
 import "sonner/dist/styles.css";
 // import 'bootstrap/dist/css/bootstrap.min.css'; 
