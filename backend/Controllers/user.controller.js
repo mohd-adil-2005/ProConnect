@@ -198,8 +198,8 @@ export const register= async(req,res)=>{
 
     }
     catch(err){
-        console.log(err);
-        return res.status(500).json({message:"something went wrong !"});
+        console.error("Register error:", err.message || err);
+        return res.status(500).json({ message: "Something went wrong. Check server logs." });
     }
 
 }
@@ -228,8 +228,8 @@ export const login= async(req, res)=>{
 
     }
     catch(err){
-        return res.status(500).json({message:"loggedin failed"});
-        console.log(err.message);
+        console.error("Login error:", err.message || err);
+        return res.status(500).json({ message: "Login failed. Check server logs." });
     }
 
 
