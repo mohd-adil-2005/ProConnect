@@ -44,27 +44,27 @@
 
 ## 🖼️ Screenshots
 
-*Replace the placeholder links below with your own screenshots: add `dashboard.png`, `discover.png`, `profile.png`, and `view-profile.png` into the `ProConnect/screenshots/` folder, then use relative paths like `screenshots/dashboard.png`.*
+*Replace the placeholder images below with your own app screenshots (e.g. `dashboard.png`) in the `screenshots/` folder when you have them.*
 
 ### Home / Dashboard
 Main feed with posts, likes, comments, and the **Top profiles** sidebar (verified users only, with blue tick).
 
-![Dashboard](https://placehold.co/800x450/1d9bf0/white?text=Pro+Connect+Dashboard)
+![Dashboard](./screenshots/dashboard.svg)
 
 ### Discover
 Browse and search profiles. Verified users show the blue badge.
 
-![Discover](https://placehold.co/800x450/0a66c2/white?text=Discover+Profiles)
+![Discover](./screenshots/discover.svg)
 
 ### Profile (own)
 Your profile with experience, education, and verified badge if applicable.
 
-![Profile](https://placehold.co/800x450/004182/white?text=My+Profile)
+![Profile](./screenshots/profile.svg)
 
 ### View profile (other user)
 Another user’s profile with banner, avatar, bio, and verified badge.
 
-![View profile](https://placehold.co/800x450/1d9bf0/white?text=View+Profile)
+![View profile](./screenshots/view-profile.svg)
 
 ---
 
