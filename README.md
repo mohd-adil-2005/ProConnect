@@ -1,232 +1,204 @@
-# Pro-Connect
+<p align="center">
+  <img src="https://img.shields.io/badge/Pro%20Connect-Professional%20Network-1d9bf0?style=for-the-badge&logo=linkedin&logoColor=white" alt="Pro Connect" />
+</p>
 
+<h1 align="center">Pro Connect</h1>
+<p align="center">
+  <strong>A modern professional networking platform — connect, share, and grow.</strong>
+</p>
 
-LinkedIn Clone 🚀
-A full-stack web application that replicates the core functionalities of LinkedIn. This project allows users to create professional profiles, connect with others, create posts, and engage with content in a shared feed.
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Redux_Toolkit-1.9-764abc?style=flat-square&logo=redux" alt="Redux" />
+  <img src="https://img.shields.io/badge/Node.js-18-339933?style=flat-square&logo=node.js" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express-4-000000?style=flat-square&logo=express" alt="Express" />
+  <img src="https://img.shields.io/badge/MongoDB-6-47a248?style=flat-square&logo=mongodb" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Mongoose-8-880000?style=flat-square" alt="Mongoose" />
+  <img src="https://img.shields.io/badge/Axios-1.6-5a29e4?style=flat-square&logo=axios" alt="Axios" />
+  <img src="https://img.shields.io/badge/CSS_Modules-Styling-1572b6?style=flat-square&logo=css3" alt="CSS" />
+</p>
 
-✨ Features
-👤 User Authentication & Profiles: Secure user registration and login. Users can create, view, and update their professional profiles, including uploading a profile picture and downloading their profile as a PDF.
+<p align="center">
+  <img src="https://img.shields.io/badge/✅_Verified_Badges-Blue%20Tick-1d9bf0?style=flat-square" alt="Verified" />
+  <img src="https://img.shields.io/badge/📱_Responsive-Web%20%26%20Mobile-34a853?style=flat-square" alt="Responsive" />
+  <img src="https://img.shields.io/badge/🔐_Auth-JWT%20%2B%20bcrypt-ea4335?style=flat-square" alt="Auth" />
+  <img src="https://img.shields.io/badge/📄_Feed-Posts%20%26%20Comments-4285f4?style=flat-square" alt="Feed" />
+  <img src="https://img.shields.io/badge/🤝_Connections-Requests%20%26%20Network-fbbc04?style=flat-square" alt="Connections" />
+</p>
 
-🤝 Professional Networking: Users can search for others, send connection requests, and accept incoming requests to build their professional network.
+---
 
-📝 Content Feed & Engagement: Create and share posts with media (images). Engage with content from others by liking and commenting on posts.
+## ✨ Features
 
-☁️ Cloud Media Storage: Utilizes Cloudinary for efficient storage and delivery of user-uploaded media like profile pictures and post images.
+| Feature | Description |
+|--------|-------------|
+| **👤 Profiles & verification** | Create and edit your profile with experience and education. **Verified users** get a blue tick badge (Instagram/X style) next to their name across the feed, comments, discover, and Top profiles. |
+| **📝 Feed & engagement** | Create posts, like, and comment. New comments appear at the **top**. Format large numbers (e.g. 3.2M likes). |
+| **🔍 Discover** | Search and browse all profiles. Click avatars to open profiles. |
+| **🤝 Connections** | Send and accept connection requests; manage your network. |
+| **🖼️ Avatars** | Profile pictures with first+last initial fallback when no image is set. |
+| **📱 Responsive** | Desktop and mobile layouts with a bottom nav on small screens. |
 
-🛠️ Tech Stack
-This project is a monorepo containing a separate frontend and backend.
+---
 
-Frontend (my-next-app):
+## 🖼️ Screenshots
 
-Framework: Next.js
+Place your app screenshots in the `screenshots/` folder, then reference them below. Suggested names: `dashboard.png`, `discover.png`, `profile.png`, `view-profile.png`.
 
-UI Library: React
+### Home / Dashboard
+Main feed with posts, likes, comments, and the **Top profiles** sidebar (verified users only, with blue tick).
 
-State Management: Redux Toolkit
+![Dashboard](screenshots/dashboard.png)
 
-Styling: CSS
+### Discover
+Browse and search profiles. Verified users show the blue badge.
 
-HTTP Client: Axios
+![Discover](screenshots/discover.png)
 
-Backend:
+### Profile (own)
+Your profile with experience, education, and verified badge if applicable.
 
-Runtime: Node.js
+![Profile](screenshots/profile.png)
 
-Framework: Express.js
+### View profile (other user)
+Another user’s profile with banner, avatar, bio, and verified badge.
 
-Database: MongoDB with Mongoose
+![View profile](screenshots/view-profile.png)
 
-Authentication: bcrypt for password hashing
+---
 
-File Uploads: Multer & Local Storage
+## 🛠️ Tech stack
 
-📂 Project Structure
-The repository is organized into two main directories:
+| Layer | Technologies |
+|-------|--------------|
+| **Frontend** | Next.js, React, Redux Toolkit, Axios, CSS Modules |
+| **Backend** | Node.js, Express, MongoDB, Mongoose |
+| **Auth** | JWT-style token, bcrypt for passwords |
+| **Media** | Local `uploads/` or Cloudinary (configurable) |
 
-LINKEDINCLONE/
-├── backend/               # Node.js & Express.js server
+---
+
+## 📂 Project structure
+
+```
+ProConnect/
+├── frontend/                 # Next.js app
+│   ├── src/
+│   │   ├── Component/        # Avatar, VerifiedBadge, Navbar
+│   │   ├── config/           # API base URL, Redux
+│   │   ├── layout/           # UserLayout, DashboardLayout (Top profiles)
+│   │   └── pages/            # dashboard, discover, profile, view_profile, my_connections
+│   └── package.json
+├── backend/
 │   ├── Controllers/
 │   ├── Models/
 │   ├── routes/
-│   ├── uploads/
-│   ├── .env               # Environment variables for backend
-│   └── server.js          # Server entry point
-│
-└── my-next-app/           # Next.js frontend application
-    ├── public/
-    ├── src/
-    ├── .env.local         # Environment variables for frontend
-    └── package.json
+│   ├── scripts/
+│   │   └── seedData.js       # Seed users (incl. verified), posts, comments
+│   ├── uploads/              # Static profile/post images (e.g. kimjongun.png)
+│   ├── .env
+│   └── server.js
+├── screenshots/              # Add dashboard, discover, profile screenshots here
+└── README.md
+```
 
-🚀 Getting Started
-To get a local copy up and running, follow these simple steps.
+---
 
-Prerequisites
-Node.js (v18 or later)
+## 🚀 Getting started
 
-npm or yarn
+### Prerequisites
 
-MongoDB (local instance or a cloud service like MongoDB Atlas)
+- **Node.js** (v18+)
+- **MongoDB** (local or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
+- **npm** or yarn
 
-Installation & Setup
-Clone the repository:
+### 1. Clone and install
 
-git clone [https://github.com/mohd-adil-2005/Pro-Connect]
-cd linkedinclone
+```bash
+git clone https://github.com/mohd-adil-2005/Pro-Connect.git
+cd Pro-Connect/ProConnect
+```
 
-Setup the Backend:
+### 2. Backend
 
-Navigate to the backend directory:
-
+```bash
 cd backend
-
-Install dependencies:
-
 npm install
+```
 
-Create a .env file in the backend directory and add the following variables. Replace the placeholder values with your actual credentials.
+Create `.env`:
 
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
+```env
+PORT=8080
+MONGO_URL=your_mongodb_connection_string
+```
 
-Start the backend server:
+Optional: add Kim Jong Un’s profile image as `backend/uploads/kimjongun.png`. The seed uses this filename for his profile picture.
 
+Start server:
+
+```bash
 npm run prod
+# or: node server.js
+```
 
-The server will be running on http://localhost:5000.
+Server runs at **http://localhost:8080**.
 
-Setup the Frontend:
+### 3. Seed data (optional)
 
-Navigate to the frontend directory from the root folder:
+Creates users (including verified: Trump, Putin, Kim Jong Un, Modi), profiles, posts, and comments.
 
-cd my-next-app
+```bash
+npm run seed
+```
 
-Install dependencies:
+Login with any seed user (password: `SeedPass123!`), e.g.:
 
+- `seed.donaldtrump@example.com`
+- `seed.kimjongun@example.com`
+- `seed.narendramodi@example.com`
+
+### 4. Frontend
+
+From the `ProConnect` root:
+
+```bash
+cd frontend
 npm install
-
-Create a .env.local file in the my-next-app directory and add the API base URL:
-
-NEXT_PUBLIC_API_URL=http://localhost:5000
-
-Start the frontend development server:
-
 npm run dev
+```
 
-Open http://localhost:3000 in your browser to see the application.
+Open **http://localhost:3000**. In development, the app uses the local backend when the hostname is `localhost`.
 
-📋 API Endpoints
-The backend provides the following RESTful API endpoints:
+---
 
-User & Authentication Routes
-Method
+## 📋 API overview
 
-Endpoint
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/register` | Register |
+| POST | `/login` | Login |
+| GET | `/user/get_allusers` | All users (for discover) |
+| POST | `/update_profile` | Upload profile picture |
+| POST | `/user_update` | Update profile text |
+| POST | `/user/send_connection_request` | Send connection request |
+| POST | `/user/accept_connection_request` | Accept request |
+| GET | `/user/get_connection_request` | Pending requests |
+| POST | `/post` | Create post |
+| GET | `/posts` | Feed (all posts) |
+| DELETE | `/destroy_post` | Delete own post |
+| POST | `/comment_post` | Add comment |
+| GET | `/get_comments` | Comments for a post (newest first) |
+| POST | `/destroy_comment` | Delete comment |
+| POST | `/increment_likes` | Like a post |
 
-Description
+---
 
-POST
+## 👤 Author
 
-/register
+**Mohd Adil**
 
-Register a new user.
-
-POST
-
-/login
-
-Log in an existing user.
-
-GET
-
-/user/get_allusers
-
-Get a list of all users.
-
-POST
-
-/update_profile
-
-Upload a user's profile picture.
-
-POST
-
-/user_update
-
-Update user profile text data.
-
-GET
-
-/user/user_profile_download
-
-Download user profile as a PDF.
-
-POST
-
-/user/send_connection_request
-
-Send a connection request to another user.
-
-POST
-
-/user/accept_connection_request
-
-Accept an incoming connection request.
-
-GET
-
-/user/get_connection_request
-
-Get pending connection requests for a user.
-
-Posts & Engagement Routes
-Method
-
-Endpoint
-
-Description
-
-POST
-
-/post
-
-Create a new post (with media).
-
-GET
-
-/posts
-
-Get all posts for the feed.
-
-DELETE
-
-/destroy_post
-
-Delete a user's own post.
-
-POST
-
-/comment_post
-
-Add a comment to a post.
-
-GET
-
-/get_comments
-
-Get all comments for a specific post.
-
-POST
-
-/destroy_comment
-
-Delete a comment.
-
-POST
-
-/increment_likes
-
-Increment the like count for a post.
-
-✒️ Author
-Mohd Adil
+<p align="center">
+  <img src="https://img.shields.io/badge/Made_with_❤️-Pro_Connect-1d9bf0?style=for-the-badge" alt="Pro Connect" />
+</p>
