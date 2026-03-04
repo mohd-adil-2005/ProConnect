@@ -104,12 +104,13 @@ async function runSeed() {
       { name: "Narendra Modi", username: "narendramodi", isVerified: true },
     ];
     for (const { name, username, isVerified } of guaranteedUsers) {
+      const profilePicture = username === "kimjongun" ? "kimjongun.png" : "default.jpg";
       const user = await User.create({
         name,
         username,
         email: `seed.${username}@example.com`,
         password: hashedPassword,
-        profilePicture: "default.jpg",
+        profilePicture,
         active: true,
         isVerified,
       });
