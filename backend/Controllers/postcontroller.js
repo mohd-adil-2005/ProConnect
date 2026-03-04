@@ -142,7 +142,7 @@ export const getAllPost= async(req, res)=>{
   
     try{
 
-const posts = await Post.find().populate('userId', 'name username email profilePicture');
+const posts = await Post.find().populate('userId', 'name username email profilePicture isVerified');
         return res.status(200).json({posts});
 
     }catch(err){
@@ -211,8 +211,10 @@ export const commentPost= async(req, res)=>{
 export const get_comment_bypost= async(req, res)=>{
     const { post_id } = req.query;
     try {
-        // Fetch all comments for the given post_id
-        const comments = await Comment.find({ postId: post_id }).populate('userId', 'name username profilePicture');
+        // Fetch all comments for the given post_id, newest first
+        const comments = await Comment.find({ postId: post_id })
+          .sort({ createdAt: -1 })
+          .populate('userId', 'name username profilePicture isVerified');
         if (!comments) {
             return res.json({ comments: [] });
         }

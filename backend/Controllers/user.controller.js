@@ -297,7 +297,7 @@ export const getuserupdateprofile=async(req,res)=>{
             return res.status(404).json({message:"user not found"});
 
         }
-        const userProfile= await Profile.findOne({userId:user._id}).populate('userId','name email username profilePicture');
+        const userProfile= await Profile.findOne({userId:user._id}).populate('userId','name email username profilePicture isVerified');
         
         if(!userProfile){
             return res.status(404).json({mesage:"user Profile not found"});
@@ -330,7 +330,7 @@ export const updateProfileData= async(req, res)=>{
 // user profile data get
 export const getUserProfile= async(req,res)=>{
     try{
-        const profiles= await Profile.find().populate('userId', 'name username  email profilePicture')
+        const profiles= await Profile.find().populate('userId', 'name username email profilePicture isVerified')
         if(!profiles){
             return res.status(404).json({message:"profiele not found Here"});
         }
@@ -401,7 +401,7 @@ export const userProfileDownload = async (req, res) => {
     if (!user_id) return res.status(400).json({ message: "User ID missing" });
 
     const userProfile = await Profile.findOne({ userId: user_id })
-      .populate("userId", "name username email profilePicture");
+      .populate("userId", "name username email profilePicture isVerified");
 
     if (!userProfile) return res.status(404).json({ message: "Profile not found" });
 
@@ -533,8 +533,8 @@ export const getuserProfilebasedOnuserName= async(req,res)=>{
         const user= await User.findOne({username});
         console.log("user debug", user);
         if(!user) return res.status(404).json({message:"user not found !"});
-        const userProfile= await Profile.find({userId:user._id}).populate('userId', 'name username email profilePicture');
-        if(!userProfile) return res.status(404).json({message:"user profile not found !"});
+        const userProfile= await Profile.find({userId:user._id}).populate('userId', 'name username email profilePicture isVerified');
+        if(!userProfile || userProfile.length === 0) return res.status(404).json({message:"user profile not found !"});
         return res.json({"profile":userProfile});
 
 
